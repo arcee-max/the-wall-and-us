@@ -748,25 +748,78 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* ══════════ TAWK.TO LIVE CHAT (embedded, in-page) ══════════ */
-// The chat now opens directly on the page in a small chat window (with a
-// built-in pop-out/expand button) instead of navigating to a tawk.to page.
+// The chat opens directly on the page in a small chat window instead of
+// navigating away to a tawk.to page.
 //
 // We load tawk's official embed widget but hide its default floating bubble,
 // because this site uses its own "Talk to Us" buttons + floating button as the
 // launcher. Clicking any of those calls openTawk(), which opens the chat inline.
+//
+// tawk ships no pop-out control of its own, so we inject one into its header
+// (see injectPopoutButton) which calls Tawk_API.popup().
 var Tawk_API = Tawk_API || {};
 var Tawk_LoadStart = new Date();
+
+var TAWK_CHAT_URL = 'https://tawk.to/chat/58b7d7955b8fe5150ee9ed59/default';
+var TAWK_EMBED_URL = 'https://embed.tawk.to/58b7d7955b8fe5150ee9ed59/default';
+
+/* ── Unread replies ──
+ * Because the widget is hidden while minimized, tawk's own bubble and unread
+ * counter never show. Without this, a listener replying after the visitor
+ * minimizes produces no signal at all.
+ */
+var chatUnread = 0;
+var chatBaseTitle = document.title;
+
+function paintChatUnread() {
+  [document.getElementById('floatChat'), document.getElementById('tab-talk')]
+    .forEach(function (el) {
+      if (!el) return;
+      el.classList.toggle('has-unread', chatUnread > 0);
+      el.setAttribute('data-unread', chatUnread > 9 ? '9+' : String(chatUnread));
+    });
+  document.title = chatUnread > 0 ? '(' + chatUnread + ') ' + chatBaseTitle : chatBaseTitle;
+}
+
+function setChatUnread(n) {
+  n = Math.max(0, n | 0);
+  if (n === chatUnread) return;
+  chatUnread = n;
+  paintChatUnread();
+}
+
+function clearChatUnread() { setChatUnread(0); }
+
+// Undocumented but present in tawk's bundle — the authoritative count.
+Tawk_API.onUnreadCountChanged = function (count) {
+  setChatUnread(typeof count === 'number' ? count : parseInt(count, 10) || 0);
+};
+
+// Fallback for if that callback ever disappears.
+Tawk_API.onChatMessageAgent = function () {
+  var maximized = typeof Tawk_API.isChatMaximized === 'function' && Tawk_API.isChatMaximized();
+  if (!maximized) setChatUnread(chatUnread + 1);
+};
 
 // Hide tawk's own bubble on load — our buttons are the launchers.
 Tawk_API.onLoad = function () {
   if (typeof Tawk_API.hideWidget === 'function') Tawk_API.hideWidget();
 };
+
+Tawk_API.onChatMaximized = function () {
+  document.body.classList.add('chat-maximized');
+  ensurePopoutControl();
+  clearChatUnread();
+};
+
 // When the visitor minimizes or closes the chat, tuck tawk's bubble away again
 // so it never lingers on top of the site's own UI (e.g. the mobile bottom nav).
 Tawk_API.onChatMinimized = function () {
+  document.body.classList.remove('chat-maximized');
   if (typeof Tawk_API.hideWidget === 'function') Tawk_API.hideWidget();
 };
 Tawk_API.onChatHidden = function () {
+  document.body.classList.remove('chat-maximized');
   if (typeof Tawk_API.hideWidget === 'function') Tawk_API.hideWidget();
 };
 
@@ -774,7 +827,7 @@ Tawk_API.onChatHidden = function () {
   var s1 = document.createElement("script");
   var s0 = document.getElementsByTagName("script")[0];
   s1.async = true;
-  s1.src = 'https://embed.tawk.to/58b7d7955b8fe5150ee9ed59/default';
+  s1.src = TAWK_EMBED_URL;
   s1.charset = 'UTF-8';
   s1.setAttribute('crossorigin', '*');
   s0.parentNode.insertBefore(s1, s0);
@@ -783,6 +836,7 @@ Tawk_API.onChatHidden = function () {
 // Open the chat in-page. Falls back to the hosted chat page only if the widget
 // hasn't finished loading yet (rare — the embed loads asynchronously).
 function openTawk() {
+  clearChatUnread();
   if (window.Tawk_API && typeof Tawk_API.maximize === 'function') {
     try {
       if (typeof Tawk_API.showWidget === 'function') Tawk_API.showWidget();
@@ -792,5 +846,100 @@ function openTawk() {
       // fall through to the fallback below
     }
   }
-  window.open('https://tawk.to/chat/58b7d7955b8fe5150ee9ed59/default', '_blank', 'noopener');
+  window.open(TAWK_CHAT_URL, '_blank', 'noopener');
+}
+
+// Open the conversation in its own window. This MUST run directly inside a click
+// handler — window.open outside a user gesture gets eaten by the popup blocker,
+// which is why there is no "wait for tawk to load" path here.
+function openTawkPopup() {
+  if (window.Tawk_API && typeof Tawk_API.popup === 'function') {
+    try {
+      Tawk_API.popup();
+      if (typeof Tawk_API.minimize === 'function') Tawk_API.minimize();
+      if (typeof Tawk_API.hideWidget === 'function') Tawk_API.hideWidget();
+      return;
+    } catch (e) {
+      // fall through to the plain window.open below
+    }
+  }
+  window.open(TAWK_CHAT_URL, 'twau_chat', 'width=420,height=680');
+}
+
+/* ── Pop-out button, injected into tawk's own chat header ── */
+// tawk v4 mounts its widget straight into this document (no iframe, no shadow
+// root), so its header is ordinary DOM we can append to. The class names are
+// undocumented though, so try several and fall back to a docked pill of our own
+// (see .chat-popout) if none of them match.
+var POPOUT_BTN_ID = 'twauPopoutBtn';
+var popoutObserver = null;
+
+var TAWK_HEADER_SELECTORS = [
+  '[class*="tawk-header"]',
+  '[class*="tawk-overlay-header"]',
+  '[class*="tawk-card-header"]',
+  '[class*="tawk-min-container"] [class*="header"]'
+];
+
+function findTawkHeader() {
+  for (var i = 0; i < TAWK_HEADER_SELECTORS.length; i++) {
+    var el = document.querySelector(TAWK_HEADER_SELECTORS[i]);
+    if (el && el.offsetParent !== null) return el;
+  }
+  return null;
+}
+
+function buildPopoutButton() {
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.id = POPOUT_BTN_ID;
+  btn.className = 'twau-popout-btn';
+  btn.title = 'Open this chat in its own window';
+  btn.setAttribute('aria-label', 'Open this chat in its own window');
+  btn.innerHTML =
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+    '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>' +
+    '<polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    openTawkPopup();
+  });
+  return btn;
+}
+
+function injectPopoutButton() {
+  if (document.getElementById(POPOUT_BTN_ID)) return true;
+  var header = findTawkHeader();
+  if (!header) return false;
+  header.appendChild(buildPopoutButton());
+  // Vue re-renders the header on state changes and can drop our node, so watch
+  // for it disappearing while the chat is still open.
+  if (!popoutObserver && window.MutationObserver) {
+    popoutObserver = new MutationObserver(function () {
+      if (document.body.classList.contains('chat-maximized') &&
+          !document.getElementById(POPOUT_BTN_ID)) {
+        injectPopoutButton();
+      }
+    });
+    popoutObserver.observe(document.body, { childList: true, subtree: true });
+  }
+  return true;
+}
+
+// The header animates in, so retry for ~2s before giving up and showing the pill.
+function ensurePopoutControl() {
+  var tries = 0;
+  (function attempt() {
+    if (injectPopoutButton()) {
+      document.body.classList.remove('chat-popout-fallback');
+      return;
+    }
+    if (++tries > 20) {
+      document.body.classList.add('chat-popout-fallback');
+      return;
+    }
+    setTimeout(attempt, 100);
+  })();
 }

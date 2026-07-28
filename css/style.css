@@ -1394,6 +1394,50 @@ body{
   @keyframes floatBtn { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
   .float-chat svg { width: 18px; height: 18px; }
 
+  /* ── Pop-out button injected into tawk's chat header ── */
+  /* Inherits colour from tawk's header so it survives any dashboard theme. */
+  .twau-popout-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px; margin-left: 4px; flex: 0 0 auto;
+    background: transparent; border: 0; border-radius: 8px;
+    color: currentColor; opacity: 0.75; cursor: pointer; padding: 0;
+    transition: opacity 0.2s, background 0.2s;
+  }
+  .twau-popout-btn svg { width: 16px; height: 16px; }
+  .twau-popout-btn:hover { opacity: 1; background: rgba(255,255,255,0.16); }
+  .twau-popout-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+  /* ── Fallback pop-out pill (only if header injection failed) ── */
+  /* Bottom-left on purpose: tawk's panel owns the bottom-right, so there is
+     nothing to overlap and no geometry to measure. */
+  .chat-popout {
+    position: fixed; bottom: 1.8rem; left: 1.8rem;
+    display: none; align-items: center; gap: 0.5rem;
+    background: var(--white); color: var(--charcoal);
+    border: 1px solid rgba(0,0,0,0.08); border-radius: 100px;
+    padding: 0.6rem 1.1rem; cursor: pointer; z-index: 450;
+    font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 0.8rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.14); transition: all 0.25s;
+  }
+  .chat-popout svg { width: 15px; height: 15px; }
+  .chat-popout:hover { background: var(--cream); transform: translateY(-2px); }
+  body.chat-maximized.chat-popout-fallback .chat-popout { display: flex; }
+  body.chat-maximized .float-chat { opacity: 0; pointer-events: none; }
+
+  /* ── Unread reply badge ── */
+  .float-chat.has-unread::after,
+  .bottom-tab.has-unread::after {
+    content: attr(data-unread);
+    position: absolute; top: -4px; right: -4px;
+    min-width: 18px; height: 18px; padding: 0 4px;
+    display: flex; align-items: center; justify-content: center;
+    background: #D64545; color: #fff; border-radius: 100px;
+    font-size: 0.65rem; font-weight: 500; line-height: 1;
+    box-shadow: 0 0 0 2px var(--white);
+  }
+  /* Stop the float animation while a badge is attached, or it drifts. */
+  .float-chat.has-unread { animation: none; }
+
   /* ══════════ RESPONSIVE ══════════ */
   @media (max-width: 900px) {
     .wwd-grid, .about-story-grid { grid-template-columns: 1fr; gap: 3rem; }
@@ -1428,6 +1472,16 @@ body{
     .float-chat {
       display: none !important;
     }
+
+    /* tawk goes fullscreen on mobile, so pin the fallback pill to the top
+       instead of the bottom, above tawk's own panel. */
+    .chat-popout {
+      bottom: auto; left: 50%; transform: translateX(-50%);
+      top: calc(0.5rem + env(safe-area-inset-top, 0px));
+      font-size: 0.75rem; padding: 0.45rem 0.9rem;
+      z-index: 2000000001;
+    }
+    .chat-popout:hover { transform: translateX(-50%) translateY(-2px); }
 
     /*
      * CRITICAL FIX: Pad the bottom of every active section so content
