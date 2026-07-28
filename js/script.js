@@ -801,9 +801,16 @@ Tawk_API.onChatMessageAgent = function () {
   if (!maximized) setChatUnread(chatUnread + 1);
 };
 
-// Hide tawk's own bubble on load — our buttons are the launchers.
+// Hide tawk's own bubble on load — our buttons are the launchers. Also honour a
+// click that landed before the widget had finished loading.
 Tawk_API.onLoad = function () {
+  tawkReady = true;
   if (typeof Tawk_API.hideWidget === 'function') Tawk_API.hideWidget();
+  if (tawkWantsMaximize) {
+    tawkWantsMaximize = false;
+    if (typeof Tawk_API.showWidget === 'function') Tawk_API.showWidget();
+    Tawk_API.maximize();
+  }
 };
 
 Tawk_API.onChatMaximized = function () {
@@ -823,31 +830,58 @@ Tawk_API.onChatHidden = function () {
   if (typeof Tawk_API.hideWidget === 'function') Tawk_API.hideWidget();
 };
 
-(function () {
-  var s1 = document.createElement("script");
-  var s0 = document.getElementsByTagName("script")[0];
+/* ── Lazy loading ──
+ * tawk's widget is ~600KB of JavaScript plus a live websocket. Loading it on
+ * every page view means every reader pays for it, including the majority who
+ * never open the chat. So we hold off until there is a sign of intent (hovering
+ * or tapping a launcher) or until the page has been idle for a few seconds,
+ * whichever comes first.
+ */
+var tawkLoaded = false;
+var tawkReady = false;
+var tawkWantsMaximize = false;
+
+function loadTawk() {
+  if (tawkLoaded) return;
+  tawkLoaded = true;
+  var s1 = document.createElement('script');
+  var s0 = document.getElementsByTagName('script')[0];
   s1.async = true;
   s1.src = TAWK_EMBED_URL;
   s1.charset = 'UTF-8';
   s1.setAttribute('crossorigin', '*');
   s0.parentNode.insertBefore(s1, s0);
-})();
+}
 
-// Open the chat in-page. Falls back to the hosted chat page only if the widget
-// hasn't finished loading yet (rare — the embed loads asynchronously).
+// Open the chat in-page. If tawk is not ready yet, flag the intent and let
+// onLoad maximize as soon as it is.
 function openTawk() {
   clearChatUnread();
-  if (window.Tawk_API && typeof Tawk_API.maximize === 'function') {
+  if (tawkReady && window.Tawk_API && typeof Tawk_API.maximize === 'function') {
     try {
       if (typeof Tawk_API.showWidget === 'function') Tawk_API.showWidget();
       Tawk_API.maximize();
       return;
     } catch (e) {
-      // fall through to the fallback below
+      // fall through and let onLoad retry
     }
   }
-  window.open(TAWK_CHAT_URL, '_blank', 'noopener');
+  tawkWantsMaximize = true;
+  loadTawk();
 }
+
+// A mouse reaches a button a couple of hundred milliseconds before the click
+// lands, which is usually enough for tawk to be ready by the time it does.
+(function warmUpTawk() {
+  var launchers = '.float-chat, .talk-big-btn, .nav-cta, .btn-primary, #tab-talk, .mobile-menu-cta';
+  document.querySelectorAll(launchers).forEach(function (el) {
+    el.addEventListener('mouseenter', loadTawk, { once: true });
+    el.addEventListener('touchstart', loadTawk, { once: true, passive: true });
+  });
+  // Safety net: someone who reads for a while and then clicks still gets an
+  // instant open.
+  window.addEventListener('load', function () { setTimeout(loadTawk, 4000); });
+})();
 
 // Open the conversation in its own window. This MUST run directly inside a click
 // handler — window.open outside a user gesture gets eaten by the popup blocker,
