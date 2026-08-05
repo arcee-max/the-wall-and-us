@@ -1,4 +1,4 @@
-/* ── CARTOON CURSOR ── */
+/* ?? CARTOON CURSOR ?? */
 
 const cursor = document.getElementById("cursor");
 const canUseCustomCursor = cursor && window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 901px)').matches;
@@ -20,7 +20,7 @@ if (canUseCustomCursor) {
   window.addEventListener('blur', hideCursor);
 }
 
-/* ── Cursor (desktop only) ── */
+/* ?? Cursor (desktop only) ?? */
 // const cursor = document.getElementById('cursor');
 // const cursorRing = document.getElementById('cursorRing');
 // let mx = 0, my = 0, rx = 0, ry = 0;
@@ -67,12 +67,12 @@ if (canUseCustomCursor) {
 // }
 
 
-/* ── Nav scroll ── */
+/* ?? Nav scroll ?? */
 window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 30);
 });
 
-/* ── Floating chat dark-bg detection ── */
+/* ?? Floating chat dark-bg detection ?? */
 const darkSections = document.querySelectorAll('.cta-banner, .about-hero, .blog-banner');
 const wallBg = document.querySelector('.hero-wall-bg');
 const floatChat = document.getElementById('floatChat');
@@ -100,7 +100,7 @@ if (floatChat) {
   window.addEventListener('scroll', updateFloatChatColor, { passive: true });
 }
 
-/* ══════════ PAGE NAVIGATION ══════════ */
+/* ?????????? PAGE NAVIGATION ?????????? */
 let pageTransitionTimer = null;
 
 function showPage(id) {
@@ -156,7 +156,7 @@ function updateBottomTabs(id) {
   }
 }
 
-/* ── Scroll reveal ── */
+/* ?? Scroll reveal ?? */
 function observeReveal() {
   const activeSection = document.querySelector('section.active');
   if (!activeSection) return;
@@ -167,7 +167,7 @@ function observeReveal() {
   els.forEach(el => { el.classList.remove('visible'); obs.observe(el); });
 }
 
-/* ── Homepage chat counter ── */
+/* ?? Homepage chat counter ?? */
 function initChatCounter() {
   const count = document.getElementById('chatCount');
   if (!count || count.dataset.initialized) return;
@@ -207,7 +207,7 @@ function initChatCounter() {
   observer.observe(count.closest('.chat-counter'));
 }
 
-/* ── Hero wall brick stagger ── */
+/* ?? Hero wall brick stagger ?? */
 function staggerBricks() {
   document.querySelectorAll('.hero-wall-bg svg rect').forEach((el, i) => {
     const fill = el.getAttribute('fill') || '';
@@ -219,7 +219,7 @@ function staggerBricks() {
   });
 }
 
-/* ── Parallax hero wall ── */
+/* ?? Parallax hero wall ?? */
 const heroMotion = {
   targetX: 0, targetY: 0, x: 0, y: 0,
   targetFigX: 0, targetFigY: 0, figX: 0, figY: 0,
@@ -267,144 +267,144 @@ window.addEventListener('scroll', () => {
   heroMotion.scrollY = document.getElementById('home').classList.contains('active') ? window.scrollY * 0.12 : 0;
 });
 
-/* ══════════ THERAPY CORNER DATA ══════════ */
+/* ?????????? THERAPY CORNER DATA ?????????? */
 const CURATED = {
   anxious:{
     label:'Anxious',subtitle:'Things that calm the nervous system and quiet the mind.',
     books:[
-      {icon:'📖',title:'The Anxiety and Worry Workbook',desc:'Aaron Beck & Clark — practical CBT tools to defuse anxious thoughts.',tag:'Self-help'},
-      {icon:'📖',title:'Dare',desc:'Barry McDonagh — reframe anxiety as excitement, not threat.',tag:'Psychology'},
-      {icon:'📖',title:'Full Catastrophe Living',desc:'Jon Kabat-Zinn — mindfulness for stress and anxiety.',tag:'Mindfulness'},
+      {icon:'??',title:'The Anxiety and Worry Workbook',desc:'Aaron Beck & Clark ? practical CBT tools to defuse anxious thoughts.',tag:'Self-help'},
+      {icon:'??',title:'Dare',desc:'Barry McDonagh ? reframe anxiety as excitement, not threat.',tag:'Psychology'},
+      {icon:'??',title:'Full Catastrophe Living',desc:'Jon Kabat-Zinn ? mindfulness for stress and anxiety.',tag:'Mindfulness'},
     ],
     music:[
-      {icon:'🎵',title:'Weightless — Marconi Union',desc:'Scientifically designed to reduce anxiety by 65%.',tag:'Ambient'},
-      {icon:'🎵',title:'Spiegel im Spiegel — Arvo Pärt',desc:'Piano and violin piece with a deeply calming pulse.',tag:'Classical'},
-      {icon:'🎵',title:'Breathe — Pink Floyd',desc:'Gentle, grounding classic for anxious minds.',tag:'Rock'},
+      {icon:'??',title:'Weightless ? Marconi Union',desc:'Scientifically designed to reduce anxiety by 65%.',tag:'Ambient'},
+      {icon:'??',title:'Spiegel im Spiegel ? Arvo P?rt',desc:'Piano and violin piece with a deeply calming pulse.',tag:'Classical'},
+      {icon:'??',title:'Breathe ? Pink Floyd',desc:'Gentle, grounding classic for anxious minds.',tag:'Rock'},
     ],
     movies:[
-      {icon:'🎬',title:'Inside Out',desc:'Pixar\'s masterpiece on understanding your own emotions.',tag:'Animation'},
-      {icon:'🎬',title:'Wild',desc:'Reese Witherspoon walking through fear toward herself.',tag:'Drama'},
-      {icon:'🎬',title:'The Secret Life of Walter Mitty',desc:'A gentle reminder to stop imagining and start living.',tag:'Adventure'},
+      {icon:'??',title:'Inside Out',desc:'Pixar\'s masterpiece on understanding your own emotions.',tag:'Animation'},
+      {icon:'??',title:'Wild',desc:'Reese Witherspoon walking through fear toward herself.',tag:'Drama'},
+      {icon:'??',title:'The Secret Life of Walter Mitty',desc:'A gentle reminder to stop imagining and start living.',tag:'Adventure'},
     ],
     podcasts:[
-      {icon:'🎙️',title:'Calm Masterclass',desc:'Daily 10-min meditations for anxiety relief.',tag:'Meditation'},
-      {icon:'🎙️',title:'The Anxiety Coaches Podcast',desc:'Practical tools for managing anxiety every day.',tag:'Self-help'},
-      {icon:'🎙️',title:'Ten Percent Happier',desc:'Dan Harris on making meditation approachable.',tag:'Mindfulness'},
+      {icon:'???',title:'Calm Masterclass',desc:'Daily 10-min meditations for anxiety relief.',tag:'Meditation'},
+      {icon:'???',title:'The Anxiety Coaches Podcast',desc:'Practical tools for managing anxiety every day.',tag:'Self-help'},
+      {icon:'???',title:'Ten Percent Happier',desc:'Dan Harris on making meditation approachable.',tag:'Mindfulness'},
     ],
   },
   lonely:{
-    label:'Lonely',subtitle:'Stories and sounds that remind you — you are not alone.',
+    label:'Lonely',subtitle:'Stories and sounds that remind you ? you are not alone.',
     books:[
-      {icon:'📖',title:'Eleanor Oliphant is Completely Fine',desc:'A tender novel about isolation and unexpected connection.',tag:'Fiction'},
-      {icon:'📖',title:'Lost Connections',desc:'Johann Hari on the real causes of loneliness and how to heal.',tag:'Non-fiction'},
-      {icon:'📖',title:'The Lonely City',desc:'Olivia Laing exploring loneliness through art.',tag:'Essay'},
+      {icon:'??',title:'Eleanor Oliphant is Completely Fine',desc:'A tender novel about isolation and unexpected connection.',tag:'Fiction'},
+      {icon:'??',title:'Lost Connections',desc:'Johann Hari on the real causes of loneliness and how to heal.',tag:'Non-fiction'},
+      {icon:'??',title:'The Lonely City',desc:'Olivia Laing exploring loneliness through art.',tag:'Essay'},
     ],
     music:[
-      {icon:'🎵',title:'Let Her Go — Passenger',desc:'A song that makes loneliness feel universally shared.',tag:'Indie'},
-      {icon:'🎵',title:'The Night Will Always Win — Manchester Orchestra',desc:'Raw and beautiful aloneness.',tag:'Alternative'},
-      {icon:'🎵',title:'Holocene — Bon Iver',desc:'Introspective and achingly beautiful.',tag:'Folk'},
+      {icon:'??',title:'Let Her Go ? Passenger',desc:'A song that makes loneliness feel universally shared.',tag:'Indie'},
+      {icon:'??',title:'The Night Will Always Win ? Manchester Orchestra',desc:'Raw and beautiful aloneness.',tag:'Alternative'},
+      {icon:'??',title:'Holocene ? Bon Iver',desc:'Introspective and achingly beautiful.',tag:'Folk'},
     ],
     movies:[
-      {icon:'🎬',title:'Her',desc:'A film about connection, loneliness, and what it means to be heard.',tag:'Drama'},
-      {icon:'🎬',title:'Castaway',desc:'The deepest human desire: to be known by another.',tag:'Drama'},
-      {icon:'🎬',title:'Nomadland',desc:'Quiet, profound, and strangely comforting.',tag:'Drama'},
+      {icon:'??',title:'Her',desc:'A film about connection, loneliness, and what it means to be heard.',tag:'Drama'},
+      {icon:'??',title:'Castaway',desc:'The deepest human desire: to be known by another.',tag:'Drama'},
+      {icon:'??',title:'Nomadland',desc:'Quiet, profound, and strangely comforting.',tag:'Drama'},
     ],
     podcasts:[
-      {icon:'🎙️',title:'The Human Experience',desc:'Stories from real people about real loneliness and belonging.',tag:'Stories'},
-      {icon:'🎙️',title:'Unlonely Planet',desc:'Research and stories on the loneliness epidemic.',tag:'Wellness'},
-      {icon:'🎙️',title:'Where Should We Begin? — Esther Perel',desc:'Real couples — real human connection.',tag:'Relationships'},
+      {icon:'???',title:'The Human Experience',desc:'Stories from real people about real loneliness and belonging.',tag:'Stories'},
+      {icon:'???',title:'Unlonely Planet',desc:'Research and stories on the loneliness epidemic.',tag:'Wellness'},
+      {icon:'???',title:'Where Should We Begin? ? Esther Perel',desc:'Real couples ? real human connection.',tag:'Relationships'},
     ],
   },
   grieving:{
     label:'Grieving',subtitle:'Gentle companions for when loss feels too big to hold alone.',
     books:[
-      {icon:'📖',title:'The Year of Magical Thinking',desc:'Joan Didion\'s raw, honest account of grief after loss.',tag:'Memoir'},
-      {icon:'📖',title:'Option B — Sheryl Sandberg',desc:'On resilience and finding joy after grief.',tag:'Non-fiction'},
-      {icon:'📖',title:'It\'s OK That You\'re Not OK',desc:'Megan Devine rejects the idea that grief needs to be fixed.',tag:'Grief'},
+      {icon:'??',title:'The Year of Magical Thinking',desc:'Joan Didion\'s raw, honest account of grief after loss.',tag:'Memoir'},
+      {icon:'??',title:'Option B ? Sheryl Sandberg',desc:'On resilience and finding joy after grief.',tag:'Non-fiction'},
+      {icon:'??',title:'It\'s OK That You\'re Not OK',desc:'Megan Devine rejects the idea that grief needs to be fixed.',tag:'Grief'},
     ],
     music:[
-      {icon:'🎵',title:'Fix You — Coldplay',desc:'One of the most comforting songs ever written.',tag:'Alternative'},
-      {icon:'🎵',title:'Blackbird — The Beatles',desc:'A song of quiet encouragement through darkness.',tag:'Classic'},
-      {icon:'🎵',title:'Tears in Heaven — Eric Clapton',desc:'Written from grief, offering solace to others.',tag:'Rock'},
+      {icon:'??',title:'Fix You ? Coldplay',desc:'One of the most comforting songs ever written.',tag:'Alternative'},
+      {icon:'??',title:'Blackbird ? The Beatles',desc:'A song of quiet encouragement through darkness.',tag:'Classic'},
+      {icon:'??',title:'Tears in Heaven ? Eric Clapton',desc:'Written from grief, offering solace to others.',tag:'Rock'},
     ],
     movies:[
-      {icon:'🎬',title:'Manchester by the Sea',desc:'One of the most honest portrayals of grief in cinema.',tag:'Drama'},
-      {icon:'🎬',title:'Coco',desc:'A beautiful, tear-filled celebration of love and remembrance.',tag:'Animation'},
-      {icon:'🎬',title:'A Monster Calls',desc:'A child\'s grief, told with breathtaking honesty.',tag:'Drama'},
+      {icon:'??',title:'Manchester by the Sea',desc:'One of the most honest portrayals of grief in cinema.',tag:'Drama'},
+      {icon:'??',title:'Coco',desc:'A beautiful, tear-filled celebration of love and remembrance.',tag:'Animation'},
+      {icon:'??',title:'A Monster Calls',desc:'A child\'s grief, told with breathtaking honesty.',tag:'Drama'},
     ],
     podcasts:[
-      {icon:'🎙️',title:'Good Grief',desc:'Tender conversations about loss, healing, and hope.',tag:'Grief'},
-      {icon:'🎙️',title:'Griefcast',desc:'Comedian Cariad Lloyd talks honestly about death.',tag:'Stories'},
-      {icon:'🎙️',title:'The Grief Recovery Method',desc:'Practical steps through the pain of loss.',tag:'Self-help'},
+      {icon:'???',title:'Good Grief',desc:'Tender conversations about loss, healing, and hope.',tag:'Grief'},
+      {icon:'???',title:'Griefcast',desc:'Comedian Cariad Lloyd talks honestly about death.',tag:'Stories'},
+      {icon:'???',title:'The Grief Recovery Method',desc:'Practical steps through the pain of loss.',tag:'Self-help'},
     ],
   },
   burnout:{
     label:'Burnt Out',subtitle:'Rest first. Then gently, these might help you find yourself again.',
     books:[
-      {icon:'📖',title:'Burnout — Emily & Amelia Nagoski',desc:'Why burnout happens and how to complete the stress cycle.',tag:'Science'},
-      {icon:'📖',title:'Do Nothing — Celeste Headlee',desc:'A manifesto for rest in an always-on world.',tag:'Self-help'},
-      {icon:'📖',title:'Rest — Alex Soojung-Kim Pang',desc:'Why you get more done when you work less.',tag:'Productivity'},
+      {icon:'??',title:'Burnout ? Emily & Amelia Nagoski',desc:'Why burnout happens and how to complete the stress cycle.',tag:'Science'},
+      {icon:'??',title:'Do Nothing ? Celeste Headlee',desc:'A manifesto for rest in an always-on world.',tag:'Self-help'},
+      {icon:'??',title:'Rest ? Alex Soojung-Kim Pang',desc:'Why you get more done when you work less.',tag:'Productivity'},
     ],
     music:[
-      {icon:'🎵',title:'Clair de Lune — Debussy',desc:'Close your eyes. Let your shoulders drop.',tag:'Classical'},
-      {icon:'🎵',title:'Breathe (In the Air) — Pink Floyd',desc:'An invitation to simply exist.',tag:'Rock'},
-      {icon:'🎵',title:'Comptine d\'un autre été — Yann Tiersen',desc:'Delicate piano that asks nothing of you.',tag:'Film score'},
+      {icon:'??',title:'Clair de Lune ? Debussy',desc:'Close your eyes. Let your shoulders drop.',tag:'Classical'},
+      {icon:'??',title:'Breathe (In the Air) ? Pink Floyd',desc:'An invitation to simply exist.',tag:'Rock'},
+      {icon:'??',title:'Comptine d\'un autre ?t? ? Yann Tiersen',desc:'Delicate piano that asks nothing of you.',tag:'Film score'},
     ],
     movies:[
-      {icon:'🎬',title:'About Time',desc:'A beautiful reminder of what actually matters.',tag:'Drama'},
-      {icon:'🎬',title:'Chef',desc:'A man walks away from pressure and rediscovers joy.',tag:'Drama'},
-      {icon:'🎬',title:'Julie & Julia',desc:'Two women finding meaning outside the grind.',tag:'Comedy'},
+      {icon:'??',title:'About Time',desc:'A beautiful reminder of what actually matters.',tag:'Drama'},
+      {icon:'??',title:'Chef',desc:'A man walks away from pressure and rediscovers joy.',tag:'Drama'},
+      {icon:'??',title:'Julie & Julia',desc:'Two women finding meaning outside the grind.',tag:'Comedy'},
     ],
     podcasts:[
-      {icon:'🎙️',title:'The Lazy Genius Podcast',desc:'Be a genius about things that matter, lazy about things that don\'t.',tag:'Lifestyle'},
-      {icon:'🎙️',title:'Feel Better Live More',desc:'Dr Rangan Chatterjee on sustainable energy and rest.',tag:'Health'},
-      {icon:'🎙️',title:'Nothing Much Happens',desc:'Deeply boring, deeply soothing bedtime stories for adults.',tag:'Sleep'},
+      {icon:'???',title:'The Lazy Genius Podcast',desc:'Be a genius about things that matter, lazy about things that don\'t.',tag:'Lifestyle'},
+      {icon:'???',title:'Feel Better Live More',desc:'Dr Rangan Chatterjee on sustainable energy and rest.',tag:'Health'},
+      {icon:'???',title:'Nothing Much Happens',desc:'Deeply boring, deeply soothing bedtime stories for adults.',tag:'Sleep'},
     ],
   },
   low:{
     label:'Feeling Low',subtitle:'Small lights for dark days.',
     books:[
-      {icon:'📖',title:'Reasons to Stay Alive — Matt Haig',desc:'A brutally honest and deeply hopeful memoir on depression.',tag:'Memoir'},
-      {icon:'📖',title:'The Bell Jar — Sylvia Plath',desc:'You are not alone in what you\'re feeling.',tag:'Fiction'},
-      {icon:'📖',title:'Lost Connections — Johann Hari',desc:'Understanding depression beyond the chemical imbalance myth.',tag:'Non-fiction'},
+      {icon:'??',title:'Reasons to Stay Alive ? Matt Haig',desc:'A brutally honest and deeply hopeful memoir on depression.',tag:'Memoir'},
+      {icon:'??',title:'The Bell Jar ? Sylvia Plath',desc:'You are not alone in what you\'re feeling.',tag:'Fiction'},
+      {icon:'??',title:'Lost Connections ? Johann Hari',desc:'Understanding depression beyond the chemical imbalance myth.',tag:'Non-fiction'},
     ],
     music:[
-      {icon:'🎵',title:'Mad World — Gary Jules',desc:'Sits with you in the sadness instead of rushing you out.',tag:'Melancholy'},
-      {icon:'🎵',title:'The Night — Disturbed',desc:'Permission to feel everything.',tag:'Rock'},
-      {icon:'🎵',title:'Someone Like You — Adele',desc:'Beautiful, cathartic, and deeply human.',tag:'Pop'},
+      {icon:'??',title:'Mad World ? Gary Jules',desc:'Sits with you in the sadness instead of rushing you out.',tag:'Melancholy'},
+      {icon:'??',title:'The Night ? Disturbed',desc:'Permission to feel everything.',tag:'Rock'},
+      {icon:'??',title:'Someone Like You ? Adele',desc:'Beautiful, cathartic, and deeply human.',tag:'Pop'},
     ],
     movies:[
-      {icon:'🎬',title:'Silver Linings Playbook',desc:'Mess and recovery and unexpected love.',tag:'Drama'},
-      {icon:'🎬',title:'Good Will Hunting',desc:'Being seen is the beginning of healing.',tag:'Drama'},
-      {icon:'🎬',title:'Eternal Sunshine of the Spotless Mind',desc:'Pain is part of what makes us whole.',tag:'Drama'},
+      {icon:'??',title:'Silver Linings Playbook',desc:'Mess and recovery and unexpected love.',tag:'Drama'},
+      {icon:'??',title:'Good Will Hunting',desc:'Being seen is the beginning of healing.',tag:'Drama'},
+      {icon:'??',title:'Eternal Sunshine of the Spotless Mind',desc:'Pain is part of what makes us whole.',tag:'Drama'},
     ],
     podcasts:[
-      {icon:'🎙️',title:'The Hilarious World of Depression',desc:'Comedians talk honestly about depression — surprisingly healing.',tag:'Comedy'},
-      {icon:'🎙️',title:'Unlocking Us — Brené Brown',desc:'On vulnerability, shame, and what it means to be human.',tag:'Psychology'},
-      {icon:'🎙️',title:'Therapy for Black Girls',desc:'Accessible mental health conversations for everyone.',tag:'Wellness'},
+      {icon:'???',title:'The Hilarious World of Depression',desc:'Comedians talk honestly about depression ? surprisingly healing.',tag:'Comedy'},
+      {icon:'???',title:'Unlocking Us ? Bren? Brown',desc:'On vulnerability, shame, and what it means to be human.',tag:'Psychology'},
+      {icon:'???',title:'Therapy for Black Girls',desc:'Accessible mental health conversations for everyone.',tag:'Wellness'},
     ],
   },
   lost:{
     label:'Feeling Lost',subtitle:'Companions for the in-between, uncertain, searching times.',
     books:[
-      {icon:'📖',title:'The Alchemist — Paulo Coelho',desc:'A timeless story about trusting the journey.',tag:'Fiction'},
-      {icon:'📖',title:'Designing Your Life — Burnett & Evans',desc:'Practical tools for building a life when you have no idea what you want.',tag:'Self-help'},
-      {icon:'📖',title:'Man\'s Search for Meaning — Viktor Frankl',desc:'Finding purpose even in the darkest circumstances.',tag:'Philosophy'},
+      {icon:'??',title:'The Alchemist ? Paulo Coelho',desc:'A timeless story about trusting the journey.',tag:'Fiction'},
+      {icon:'??',title:'Designing Your Life ? Burnett & Evans',desc:'Practical tools for building a life when you have no idea what you want.',tag:'Self-help'},
+      {icon:'??',title:'Man\'s Search for Meaning ? Viktor Frankl',desc:'Finding purpose even in the darkest circumstances.',tag:'Philosophy'},
     ],
     music:[
-      {icon:'🎵',title:'Fast Car — Tracy Chapman',desc:'About wanting more, and not knowing how.',tag:'Folk'},
-      {icon:'🎵',title:'Lost! — Coldplay',desc:'A gentle anthem for anyone who can\'t find their way.',tag:'Alternative'},
-      {icon:'🎵',title:'Road Trippin\' — Red Hot Chili Peppers',desc:'The beauty of not knowing where you\'re going.',tag:'Rock'},
+      {icon:'??',title:'Fast Car ? Tracy Chapman',desc:'About wanting more, and not knowing how.',tag:'Folk'},
+      {icon:'??',title:'Lost! ? Coldplay',desc:'A gentle anthem for anyone who can\'t find their way.',tag:'Alternative'},
+      {icon:'??',title:'Road Trippin\' ? Red Hot Chili Peppers',desc:'The beauty of not knowing where you\'re going.',tag:'Rock'},
     ],
     movies:[
-      {icon:'🎬',title:'Eat Pray Love',desc:'A woman dismantles her life to find herself — messy and honest.',tag:'Drama'},
-      {icon:'🎬',title:'The Secret Life of Walter Mitty',desc:'A dreamer who finally takes the leap.',tag:'Adventure'},
-      {icon:'🎬',title:'Paterson',desc:'A quiet film about finding meaning in everyday life.',tag:'Drama'},
+      {icon:'??',title:'Eat Pray Love',desc:'A woman dismantles her life to find herself ? messy and honest.',tag:'Drama'},
+      {icon:'??',title:'The Secret Life of Walter Mitty',desc:'A dreamer who finally takes the leap.',tag:'Adventure'},
+      {icon:'??',title:'Paterson',desc:'A quiet film about finding meaning in everyday life.',tag:'Drama'},
     ],
     podcasts:[
-      {icon:'🎙️',title:'How I Built This — Guy Raz',desc:'People who had no idea what they were doing — and figured it out.',tag:'Stories'},
-      {icon:'🎙️',title:'The Tim Ferriss Show',desc:'Conversations with people who redefined their paths.',tag:'Inspiration'},
-      {icon:'🎙️',title:'What Should I Read Next?',desc:'For when even knowing where to start feels overwhelming.',tag:'Books'},
+      {icon:'???',title:'How I Built This ? Guy Raz',desc:'People who had no idea what they were doing ? and figured it out.',tag:'Stories'},
+      {icon:'???',title:'The Tim Ferriss Show',desc:'Conversations with people who redefined their paths.',tag:'Inspiration'},
+      {icon:'???',title:'What Should I Read Next?',desc:'For when even knowing where to start feels overwhelming.',tag:'Books'},
     ],
   }
 };
@@ -457,7 +457,7 @@ function renderCurated() {
   initCursorSelectors(); // Re-bind custom cursors on dynamically injected cards
 }
 
-/* ── AI CHAT (Wally) ── */
+/* ?? AI CHAT (Wally) ?? */
 const aiMessages = document.getElementById('aiMessages');
 let chatHistory = [];
 let aiResponseCount = 0;
@@ -492,7 +492,7 @@ async function sendAiMessage() {
 function appendMsg(role, text) {
   const div = document.createElement('div');
   div.className = `msg ${role}`;
-  div.innerHTML = `<div class="msg-avatar">${role === 'ai' ? '🌿' : '🫂'}</div><div class="msg-bubble">${text.replace(/\n/g, '<br>')}</div>`;
+  div.innerHTML = `<div class="msg-avatar">${role === 'ai' ? '??' : '??'}</div><div class="msg-bubble">${text.replace(/\n/g, '<br>')}</div>`;
   aiMessages.appendChild(div);
   aiMessages.scrollTop = aiMessages.scrollHeight;
   return div;
@@ -501,7 +501,7 @@ function appendMsg(role, text) {
 function appendTyping() {
   const div = document.createElement('div');
   div.className = 'msg ai';
-  div.innerHTML = `<div class="msg-avatar">🌿</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  div.innerHTML = `<div class="msg-avatar">??</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
   aiMessages.appendChild(div);
   aiMessages.scrollTop = aiMessages.scrollHeight;
   return div;
@@ -632,12 +632,13 @@ function initCtaParticles() {
   });
 }
 
-/* ══════════ SHARE YOUR EXPERIENCE — FORM SUBMISSION ══════════ */
+/* ?????????? SHARE YOUR EXPERIENCE ? FORM SUBMISSION ?????????? */
 
 // 1) Deploy the Google Apps Script web app (see the README the deployment guide gave you).
 // 2) Paste the resulting "Web app URL" below, between the quotes.
-// 3) That's it — submissions will start landing as new rows in your Google Sheet.
+// 3) That's it ? submissions will start landing as new rows in your Google Sheet.
 const SHARE_FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwnuNJRIpDkc5wOzpQhdxM6OYrXwSgHYOPtduAXWI7uDq0iLPJwZDbKW6gGEYXXi6QD/exec";
+const CONTACT_FORM_ENDPOINT = "https://formsubmit.co/ajax/twaualice@gmail.com";
 
 function initShareForm() {
   const form = document.getElementById('shareForm');
@@ -662,7 +663,7 @@ function initShareForm() {
       return;
     }
 
-    // Honeypot check — if this hidden field has a value, a bot filled the form. Quietly stop.
+    // Honeypot check ? if this hidden field has a value, a bot filled the form. Quietly stop.
     const honeypot = document.getElementById('shareWebsite');
     if (honeypot && honeypot.value) {
       setStatus("Thank you for sharing. We've received your story.", 'success');
@@ -685,7 +686,7 @@ function initShareForm() {
     });
 
     submitBtn.disabled = true;
-    submitLabel.textContent = 'Sending…';
+    submitLabel.textContent = 'Sending?';
     statusBox.className = 'form-status';
 
     fetch(SHARE_FORM_ENDPOINT, {
@@ -698,7 +699,7 @@ function initShareForm() {
       .then(res => res.json())
       .then(data => {
         if (data && data.result === 'success') {
-          setStatus("Thank you for trusting us with your story. We've received it. 💛", 'success');
+          setStatus("Thank you for trusting us with your story. We've received it. ??", 'success');
           form.reset();
         } else {
           throw new Error((data && data.message) || 'Unknown error');
@@ -710,6 +711,68 @@ function initShareForm() {
       .finally(() => {
         submitBtn.disabled = false;
         submitLabel.textContent = 'Share My Story';
+      });
+  });
+}
+
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  const statusBox = document.getElementById('contactFormStatus');
+  const submitBtn = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const firstName = document.getElementById('contactFirstName').value.trim();
+    const lastName = document.getElementById('contactLastName').value.trim();
+    const email = document.getElementById('contactEmail').value.trim();
+    const message = document.getElementById('contactMessage').value.trim();
+    if (!CONTACT_FORM_ENDPOINT) {
+      statusBox.textContent = 'The contact form is not connected yet. Please email twaualice@gmail.com.';
+      statusBox.className = 'form-status visible error';
+      return;
+    }
+
+    const payload = {
+      first_name: firstName,
+      last_name: lastName,
+      email: email,
+      message: message,
+      _subject: 'New website contact inquiry',
+      _template: 'table',
+      _replyto: email,
+      _url: 'https://thewallandus.com/',
+      source_page: window.location.href
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending?';
+    statusBox.className = 'form-status';
+
+    fetch(CONTACT_FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (!data || (data.success !== true && data.success !== 'true')) throw new Error('Submission failed');
+        statusBox.textContent = 'Thank you ? your message has been sent. We will get back to you shortly.';
+        statusBox.className = 'form-status visible success';
+        form.reset();
+      })
+      .catch(() => {
+        statusBox.textContent = 'Something went wrong. Please email twaualice@gmail.com.';
+        statusBox.className = 'form-status visible error';
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send message';
       });
   });
 }
@@ -726,8 +789,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initHeroParallax();
   initCtaParticles();
   initShareForm();
+  initContactForm();
   initChatCounter();
   observeReveal();
+
 });
 
 

@@ -39,7 +39,7 @@
     opacity: 0.5;
   }
 
-  /* ── CURSOR ── */
+  /* ?? CURSOR ?? */
   /* .cursor {
     display: none;
     position: fixed;
@@ -89,7 +89,7 @@
   } */
 
 
-  /* ── CUSTOM CARTOON CURSOR ── */
+  /* ?? CUSTOM CARTOON CURSOR ?? */
 
 body{
   cursor:none;
@@ -178,7 +178,7 @@ body{
   }
 }
 
-  /* ── NAV ── */
+  /* ?? NAV ?? */
   nav#mainNav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 500;
     padding: 1.1rem 5%;
@@ -197,7 +197,7 @@ body{
                 border-color 0.4s cubic-bezier(0.4,0,0.2,1);
   }
 
-  /* ── FLOATING PILL NAV (desktop only) ── */
+  /* ?? FLOATING PILL NAV (desktop only) ?? */
   nav#mainNav.scrolled {
     background: rgba(245,240,232,0.97);
     box-shadow: 0 8px 40px rgba(44,36,22,0.14), 0 2px 12px rgba(44,36,22,0.06);
@@ -210,7 +210,7 @@ body{
     padding: 0.65rem 4%;
   }
 
-  /* Disable pill on mobile — nav stays full width */
+  /* Disable pill on mobile ? nav stays full width */
   @media (max-width: 700px) {
     nav#mainNav.scrolled {
       top: 8px;
@@ -258,7 +258,7 @@ body{
   .nav-cta:hover { background: var(--charcoal) !important; transform: translateY(-1px); }
   .nav-cta::after { display: none !important; }
 
-  /* ── BOTTOM TAB BAR ── */
+  /* ?? BOTTOM TAB BAR ?? */
   .bottom-nav {
     display: none; /* shown via media query below */
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -306,7 +306,7 @@ body{
   .bottom-tab.active svg { transform: scale(1.12); }
   .bottom-tab:active { transform: scale(0.92); }
 
-  /* ── SECTIONS ── */
+  /* ?? SECTIONS ?? */
   section {
     display: none;
   }
@@ -323,7 +323,7 @@ body{
     animation: pageExit 0.15s ease both;
   }
 
-  /* ── BUTTONS ── */
+  /* ?? BUTTONS ?? */
   .btn-primary {
     background: var(--terracotta); color: var(--white);
     border: none; padding: 0.85rem 1.9rem; border-radius: 50px;
@@ -343,7 +343,7 @@ body{
   }
   .btn-secondary:hover { border-color: var(--terracotta); color: var(--terracotta); transform: translateY(-2px); }
 
-  /* ── SECTION HELPERS ── */
+  /* ?? SECTION HELPERS ?? */
   .section-pad { padding: 5.5rem 5%; }
   .section-label {
     font-family: 'Caveat', cursive; font-size: 1.1rem;
@@ -362,15 +362,15 @@ body{
     text-decoration: none; transition: gap 0.2s; cursor: none;
   }
   .link-arrow:hover { gap: 0.7rem; }
-  .link-arrow::after { content: '→'; }
+  .link-arrow::after { content: '?'; }
 
-  /* ─────────────────────────────────────────────────────────────────
+  /* ?????????????????????????????????????????????????????????????????
      SECTION BACKGROUND DIFFUSION
      150-200px gradient bleed zones between every section transition
      so colours melt into each other like one continuous canvas.
-  ───────────────────────────────────────────────────────────────── */
+  ????????????????????????????????????????????????????????????????? */
 
-  /* Generic bleed helpers — kept for backward compat */
+  /* Generic bleed helpers ? kept for backward compat */
   .bleed-bottom { position: relative; }
   .bleed-bottom::after {
     content: '';
@@ -383,7 +383,7 @@ body{
   .bleed-cream-to-white::after { background: linear-gradient(to bottom, transparent, var(--white)); }
   .bleed-white-to-cream::after { background: linear-gradient(to bottom, transparent, var(--cream)); }
 
-  /* Hero → Logo Bridge (white) → What We Do (white): seamless */
+  /* Hero ? Logo Bridge (white) ? What We Do (white): seamless */
   .what-we-do {
     background: var(--white);
     position: relative;
@@ -400,7 +400,7 @@ body{
   /* Ensure content sits above the gradient overlay */
   .what-we-do > * { position: relative; z-index: 2; }
 
-  /* What We Do (white) → How It Works (cream-dark): white melts into cream-dark */
+  /* What We Do (white) ? How It Works (cream-dark): white melts into cream-dark */
   .how-it-works {
     background: var(--cream-dark);
     position: relative;
@@ -426,7 +426,7 @@ body{
   }
   .how-it-works > * { position: relative; z-index: 2; }
 
-  /* Blog Preview (white) → CTA Banner (charcoal): white melts toward charcoal */
+  /* Blog Preview (white) ? CTA Banner (charcoal): white melts toward charcoal */
   .blog-preview {
     background: var(--white);
     position: relative;
@@ -451,7 +451,7 @@ body{
   }
   .blog-preview > * { position: relative; z-index: 2; }
 
-  /* About: story (white) → values (cream) */
+  /* About: story (white) ? values (cream) */
   .about-story {
     background: var(--white);
     position: relative;
@@ -467,7 +467,7 @@ body{
   }
   .about-story > * { position: relative; z-index: 2; }
 
-  /* Values (cream) → CTA banner (charcoal): cream tapers toward dark */
+  /* Values (cream) ? CTA banner (charcoal): cream tapers toward dark */
   .values-section {
     background: var(--cream);
     position: relative;
@@ -526,7 +526,7 @@ body{
   }
   .therapy-content > * { position: relative; z-index: 2; }
 
-  /* ── ANIMATIONS ── */
+  /* ?? ANIMATIONS ?? */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(28px); }
     to { opacity: 1; transform: translateY(0); }
@@ -565,7 +565,7 @@ body{
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* ══════════ HOME ══════════ */
+  /* ?????????? HOME ?????????? */
   .hero {
     min-height: 100vh; display: flex; align-items: center;
     position: relative; padding: 7rem 5% 5rem; overflow: hidden;
@@ -653,7 +653,7 @@ body{
   }
   .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 1s 0.5s ease both; }
 
-  /* Hero → Logo Bridge → What We Do */
+  /* Hero ? Logo Bridge ? What We Do */
   .logo-bridge {
     position: relative;
     background: var(--white);
@@ -861,7 +861,7 @@ body{
   .cta-banner p { font-size: 1rem; color: rgba(253,250,245,0.65); margin-bottom: 2.2rem; position: relative; }
   .cta-banner .btn-primary { box-shadow: 0 4px 30px rgba(196,96,58,0.5); font-size: 1rem; padding: 0.95rem 2.3rem; position: relative; }
 
-  /* ══════════ ABOUT ══════════ */
+  /* ?????????? ABOUT ?????????? */
   .about-hero {
     background: var(--charcoal); padding: 10rem 5% 6rem;
     position: relative; overflow: hidden; text-align: center;
@@ -886,7 +886,7 @@ body{
   .value-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; margin-bottom: 0.65rem; color: var(--charcoal); }
   .value-card p { font-size: 0.88rem; color: var(--warm-gray); line-height: 1.7; }
 
-  /* ══════════ BLOG ══════════ */
+  /* ?????????? BLOG ?????????? */
   .blog-banner { background: var(--sage); padding: 9rem 5% 5rem; position: relative; overflow: hidden; }
   .blog-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 50% 70% at 70% 50%, rgba(245,240,232,0.08) 0%, transparent 60%); }
   .blog-banner-inner { position: relative; z-index: 2; max-width: 580px; }
@@ -953,7 +953,7 @@ body{
     line-height: 1.7;
   }
 
-  /* ══════════ SHARE YOUR EXPERIENCE ══════════ */
+  /* ?????????? SHARE YOUR EXPERIENCE ?????????? */
   .share-hero {
     background: var(--cream); padding: 9rem 5% 1rem; text-align: center;
     position: relative; overflow: hidden;
@@ -1010,7 +1010,20 @@ body{
   .form-status.success { background: var(--sage-pale); color: #3F5E47; border: 1px solid rgba(122,158,135,0.35); }
   .form-status.error { background: rgba(196,96,58,0.08); color: var(--terracotta); border: 1px solid rgba(196,96,58,0.25); }
 
-  /* ══════════ TALK ══════════ */
+  /* CONTACT */
+  .contact-page {
+    min-height: 100vh; padding: 9rem 5% 6rem; background: var(--cream);
+    display: flex; justify-content: center;
+    background-image: radial-gradient(ellipse 55% 45% at 50% 15%, rgba(196,96,58,0.08), transparent 70%);
+  }
+  .contact-form-wrap { width: 100%; max-width: 640px; }
+  .contact-form-wrap .section-label { text-align: center; }
+  .contact-form-wrap h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.1rem,4.5vw,3.4rem); text-align: center; color: var(--charcoal); margin-bottom: 1rem; }
+  .contact-form-wrap h1 em { color: var(--terracotta); }
+  .contact-intro { max-width: 590px; margin: 0 auto 2.2rem; color: var(--charcoal-soft); text-align: center; line-height: 1.8; }
+  .contact-intro a { color: var(--terracotta); font-weight: 500; overflow-wrap: anywhere; }
+
+  /* ?????????? TALK ?????????? */
   .talk-hero {
     min-height: 100vh; display: flex; align-items: center; justify-content: center;
     text-align: center; background: var(--cream); padding: 8rem 5% 5rem;
@@ -1050,7 +1063,7 @@ body{
   .talk-card h3 { font-family: 'Playfair Display', serif; font-size: 1.02rem; margin-bottom: 0.45rem; color: var(--charcoal); }
   .talk-card p { font-size: 0.83rem; color: var(--warm-gray); line-height: 1.7; }
 
-  /* ══════════ THERAPY CORNER ══════════ */
+  /* ?????????? THERAPY CORNER ?????????? */
   .therapy-hero {
     background: linear-gradient(135deg, var(--sage) 0%, #5A8A6E 100%);
     padding: 10rem 5% 5rem; position: relative; overflow: hidden;
@@ -1272,7 +1285,7 @@ body{
   .ai-send svg { width: 18px; height: 18px; }
   .ai-disclaimer { text-align: center; font-size: 0.75rem; color: var(--warm-gray); padding: 0.7rem 1.8rem 1rem; }
 
-  /* ── FOOTER ── */
+  /* ?? FOOTER ?? */
   footer {
     background: var(--charcoal); padding: 3rem 5% 1.4rem;
     color: rgba(253,250,245,0.55);
@@ -1301,7 +1314,7 @@ body{
   .footer-social-btn:hover { background: rgba(196,96,58,0.2); color: var(--terracotta-light); border-color: rgba(196,96,58,0.3); }
   .footer-divider { height: 1px; background: rgba(253,250,245,0.07); margin: 0 0 1.2rem; }
 
-  /* ── FLOATING CHAT BUTTON ── */
+  /* ?? FLOATING CHAT BUTTON ?? */
   .float-chat {
     position: fixed; bottom: 1.8rem; right: 1.8rem;
     background: var(--terracotta); color: var(--white);
@@ -1318,7 +1331,7 @@ body{
   @keyframes floatBtn { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
   .float-chat svg { width: 18px; height: 18px; }
 
-  /* ══════════ RESPONSIVE ══════════ */
+  /* ?????????? RESPONSIVE ?????????? */
   @media (max-width: 900px) {
     .wwd-grid, .about-story-grid { grid-template-columns: 1fr; gap: 3rem; }
     .values-grid { grid-template-columns: 1fr 1fr; }
@@ -1331,7 +1344,7 @@ body{
     .curated-cards-grid { grid-template-columns: 1fr 1fr; }
   }
 
-  /* ══════════ MOBILE — ≤700px ══════════ */
+  /* ?????????? MOBILE ? ?700px ?????????? */
   @media (max-width: 700px) {
     /* Show bottom nav as flex */
     .bottom-nav {
@@ -1343,7 +1356,7 @@ body{
       display: none !important;
     }
 
-    /* Float chat button hidden on mobile — bottom nav handles it */
+    /* Float chat button hidden on mobile ? bottom nav handles it */
     .float-chat {
       display: none !important;
     }
