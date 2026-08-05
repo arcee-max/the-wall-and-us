@@ -567,8 +567,8 @@ body{
 
   /* ?????????? HOME ?????????? */
   .hero {
-    min-height: 100vh; display: flex; align-items: center;
-    position: relative; padding: 7rem 5% 5rem; overflow: hidden;
+    min-height: 100vh; display: flex; align-items: flex-start;
+    position: relative; padding: 5.5rem 5% 3rem; overflow: hidden;
   }
   .hero-bg {
     position: absolute; inset: 0;
@@ -1376,7 +1376,7 @@ body{
 
     /* Hero adjustments */
     .hero {
-      padding: 6.5rem 5% 4rem;
+      padding: 5rem 5% 3rem;
       align-items: flex-start;
       min-height: calc(100svh - var(--bottom-nav-h));
     }
