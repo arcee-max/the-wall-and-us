@@ -638,7 +638,7 @@ function initCtaParticles() {
 // 2) Paste the resulting "Web app URL" below, between the quotes.
 // 3) That's it ? submissions will start landing as new rows in your Google Sheet.
 const SHARE_FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwnuNJRIpDkc5wOzpQhdxM6OYrXwSgHYOPtduAXWI7uDq0iLPJwZDbKW6gGEYXXi6QD/exec";
-const CONTACT_FORM_ENDPOINT = "https://formsubmit.co/ajax/twaualice@gmail.com";
+const CONTACT_FORM_ENDPOINT = "https://formsubmit.co/ajax/thewallandusfoundation@gmail.com";
 
 function initShareForm() {
   const form = document.getElementById('shareForm');
@@ -733,7 +733,7 @@ function initContactForm() {
     const email = document.getElementById('contactEmail').value.trim();
     const message = document.getElementById('contactMessage').value.trim();
     if (!CONTACT_FORM_ENDPOINT) {
-      statusBox.textContent = 'The contact form is not connected yet. Please email twaualice@gmail.com.';
+      statusBox.textContent = 'The contact form is not connected yet. Please email thewallandusfoundation@gmail.com.';
       statusBox.className = 'form-status visible error';
       return;
     }
@@ -767,7 +767,7 @@ function initContactForm() {
         form.reset();
       })
       .catch(() => {
-        statusBox.textContent = 'Something went wrong. Please email twaualice@gmail.com.';
+        statusBox.textContent = 'Something went wrong. Please email thewallandusfoundation@gmail.com.';
         statusBox.className = 'form-status visible error';
       })
       .finally(() => {
