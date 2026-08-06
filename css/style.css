@@ -1454,3 +1454,21 @@ body{
     .footer-grid { grid-template-columns: 1fr; }
     .hero-title { font-size: clamp(2rem, 9vw, 2.8rem); }
   }
+
+
+/* Blog article card display */
+#blog .construction-notice { display: none; }
+#blog .construction-blur { filter: none; opacity: 1; pointer-events: auto; user-select: auto; }
+#blog .blog-full-grid .blog-card:nth-child(n + 4) { display: none; }
+#blog .blog-full-grid .blog-card-body p,
+#blog .blog-full-grid .blog-card-date { display: none; }
+#blog .blog-full-grid::after {
+  content: 'Stories are being shaped carefully';
+  grid-column: 1 / -1;
+  margin: 1.15rem 15px 3rem;
+  color: var(--terracotta);
+  font-family: 'Caveat', cursive;
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-align: center;
+}
