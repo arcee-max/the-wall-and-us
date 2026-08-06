@@ -1474,3 +1474,26 @@ body{
 }
 
 #blog .blog-full-grid .blog-card-body p { display: block; }
+
+
+/* Individual blog construction notices */
+#blog .blog-full-grid::after { content: none; }
+#blog .blog-full-grid .blog-card-body p {
+  display: block;
+  filter: blur(3px);
+  opacity: 0.55;
+  user-select: none;
+}
+#blog .blog-full-grid .blog-card-date { display: flex; }
+#blog .blog-full-grid .blog-card-body::after {
+  display: block;
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid rgba(196,96,58,0.2);
+  color: var(--terracotta);
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+#blog .blog-full-grid .blog-card:nth-child(1) .blog-card-body::after { content: '🚧 A thoughtful story is taking shape here. We are carefully gathering the words that will make it feel right.'; }
+#blog .blog-full-grid .blog-card:nth-child(2) .blog-card-body::after { content: '🚧 More reflections are on their way. We are making space for honest moments, gentle insight, and real connection.'; }
+#blog .blog-full-grid .blog-card:nth-child(3) .blog-card-body::after { content: '🚧 Watch this space for what comes next. A new perspective is being shaped with care, one meaningful thought at a time.'; }
