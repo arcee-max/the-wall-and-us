@@ -1472,3 +1472,5 @@ body{
   font-weight: 600;
   text-align: center;
 }
+
+#blog .blog-full-grid .blog-card-body p { display: block; }
